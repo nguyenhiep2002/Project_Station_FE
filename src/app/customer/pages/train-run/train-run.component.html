@@ -1,0 +1,93 @@
+<div class="flex justify-center items-center my-5">
+  <h1 class="font-semibold text-4xl">List of suitable trains</h1>
+</div>
+<div class="ml-[225px]">
+    <p class=" inline  px-5 py-1 font-medium text-base bg-orange-400 text-white">Chiều đi: <span class="font-normal"> Ngày 22-4-2024 từ LO2-LG13</span> </p>
+</div>
+
+<div class="ml-[100px] mt-10 flex relative">
+<div class=" ml-[190px] "  *ngFor="let item of trainMaster">
+  <div class="col-xs-4 col-sm-3 et-col-md-2 et-train-block ng-scope" ng-repeat="tau in onScreenGoingTrains"
+  (click)="doiChuyen(item.totalClassWagons, item.id)"  style="cursor: pointer" analytics-on="click"  analytics-event="SelectTrain">
+  <div class="et-train-head et-train-head-selected"
+    ng-class="{'et-train-head-selected': tau.MacTau == searchData.tauDi.MacTau}">
+    <div class="row center-block" style="width: 40%; margin-bottom: 3px">
+      <div class="et-train-lamp text-center ng-binding" ng-style="{color: tau.HasCheapTicket?'#bf8c01':'#555555'}"
+        style="color: rgb(85, 85, 85);">{{item.name}}</div>
+    </div>
+    <div class="et-train-head-info">
+      <div class="row et-no-margin"><span class="pull-left et-bold ng-binding">TG đi</span> <span
+          class="pull-right ng-binding">27/04 07:26</span></div>
+      <div class="row et-no-margin"><span class="pull-left et-bold ng-binding">TG đến</span> <span
+          class="pull-right"></span> <span class="pull-right ng-binding">27/04 10:07</span></div>
+      <div class="row et-no-margin">
+        <div class="et-col-50">
+          <div class="et-text-sm ng-binding">SL chỗ đặt</div>
+          <div class="et-text-large et-bold pull-left ng-binding" style="margin-left: 5px">12</div>
+        </div>
+        <div class="et-col-50 text-center">
+          <div class="et-text-sm ng-binding">SL chỗ trống</div>
+          <div class="et-text-large et-bold pull-right ng-binding" style="margin-right: 5px">123</div>
+        </div>
+      </div>
+    </div>
+    <div class="row et-no-margin">
+      <div class="et-col-50"><span class="et-train-lamp-bellow-left"></span></div>
+      <div class="et-col-50"><span class="et-train-lamp-bellow-right"></span></div>
+    </div>
+  </div>
+  <div class="et-train-base"></div>
+  <div class="et-train-base-2"></div>
+  <div class="et-train-base-3"></div>
+  <div class="et-train-base-4"></div>
+  <div class="et-train-base-5"></div>
+</div>
+</div>
+</div>
+<div class="classWagons ml-[225px] mt-[180px] flex" *ngIf="wagonNumbers.length >0">
+  <div *ngFor="let item of wagonNumbers" (click)="chonToa(item)">
+    <div class="bg-blue-300 rounded-lg mx-[1px]" [ngClass]="{'bg-blue-300': selectedItem !== item, 'bg-orange-300': selectedItem === item}">
+      <img src="../../../../../assets/images/customer/trainCar2.png" alt="" width="55px">
+    </div>
+    <p class="text-center">{{item.number}}</p>
+  </div>
+    <div class="locomotive">
+      <img src="../../../../../assets/images/customer/train2.png" alt=""  width="55px">
+    </div>
+
+</div>
+<div class="flex" >
+<div *ngIf="buttonArray.length > 0" class=" ml-[225px] mt-[20px] button-container border-2 border-indigo-600 w-[800px] p-5 h-[200px]">
+  <ng-container *ngFor="let button of buttonArray; let i = index;">
+    <button class="inline button border border-indigo-600 w-[30px]"
+    [style.gridColumn]="getGridColumn(i)"
+    [style.gridRow]="getGridRow(i)"
+    [class.bg-orange-300]="isButtonSelected(button)"
+    (click)="toggleButton(button)">
+    {{ button }}
+  </button>
+  </ng-container>
+</div>
+<div *ngIf="buttonArray.length > 0" class="w-[370px] ml-[100px] border-2 border-indigo-600 flex flex-col justify-between">
+  <div class="flex justify-center items-center">
+    <p class="inline bg-orange-400 px-5">Danh sách vé tàu hiện đang được chọn</p>
+  </div>
+  <div *ngFor="let item of buttonSelect; let i = index;">
+    <div class="title flex mt-1 ml-2">
+      <p>{{ i + 1 }}. Ghế: {{ item.button }}; </p>
+      <p> ClassWagon: {{ item.classWagon }}; </p>
+      <p> IdTrain: {{ item.idTrain }}</p>
+      <button nz-button nzType="default" class="ml-5" (click)="removeTicket(item)">
+        <span nz-icon nzType="delete" nzTheme="outline"></span>
+      </button>
+    </div>
+    <p class="ml-2">--------------------------------------</p>
+  </div>
+  <div class="self-center my-2">
+    <button [disabled]="buttonSelect.length === 0" nz-button nzType="primary" class="b-0">Mua Vé</button>
+  </div>
+</div>
+</div>
+
+
+

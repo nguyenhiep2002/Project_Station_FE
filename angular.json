@@ -34,9 +34,15 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
+              "src/theme.less",
               "src/styles.scss"
             ],
             "scripts": [],
@@ -109,5 +115,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "cb2e0a10-2788-49a9-a5d2-317c7237a7c3"
   }
 }

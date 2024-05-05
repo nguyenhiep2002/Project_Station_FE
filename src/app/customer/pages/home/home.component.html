@@ -1,0 +1,82 @@
+<div class="flex justify-center items-center mt-3">
+
+  <form class=" border-2 border-indigo-600 w-[450px] p-[45px]" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Station Start</nz-form-label>
+        <nz-select
+          class="w-[200px]"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Select a station start"
+          formControlName="stationStart"
+          [(ngModel)]="selectedValueS"
+          popupMatchSelectWidth="200px"
+        >
+          <nz-option
+            *ngFor="let item of items"
+            nzLabel="{{ item.name }}"
+            nzValue="{{ item.id }}"
+          ></nz-option>
+      </nz-select>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Station End</nz-form-label>
+        <nz-select
+          class="w-[200px]"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Select a station end"
+          formControlName="stationEnd"
+          [(ngModel)]="selectedValueE"
+          popupMatchSelectWidth="200px"
+        >
+          <nz-option
+            *ngFor="let item of items"
+            nzLabel="{{ item.name }}"
+            nzValue="{{ item.id }}"
+          ></nz-option>
+      </nz-select>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24">Type Ticket</nz-form-label>
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <nz-radio-group   formControlName="radioValue" #radioType>
+          <label nz-radio  nzValue="0">one-way trip</label>
+          <label nz-radio nzValue="1">round trip</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Date Start</nz-form-label>
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <nz-date-picker formControlName="dateStart"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item >
+      <nz-form-label [nzSm]="8" [nzXs]="24" >Date End</nz-form-label>
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <nz-date-picker  formControlName="dateEnd"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item class="mt-5">
+      <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 16, offset: 8 }">
+        <button [disabled]="validateForm.invalid" nz-button nzType="primary">Search</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+
+
+<!-- <form nz-form>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input name="email" type="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+</form> -->
